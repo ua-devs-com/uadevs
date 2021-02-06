@@ -4,10 +4,14 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 First, run the development server:
 
-```bash
-npm run dev
-# or
+```
 yarn dev
+```
+### build and start project in container as a production server
+
+```
+sudo docker build --no-cache -t uadevs .
+sudo docker run -p 8080:3000 uadevs
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -32,3 +36,18 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## HELP FOR THE DOCKER commands 
+
+### build and start whole project
+sudo docker build --no-cache -t uadevs .
+sudo docker run -p 8080:3000 uadevs
+
+### clear system from all stopped containers and images
+docker system prune 
+
+### incremental build of uadevs container
+docker build -t uadevs .
+
+### run bash inside uadevs container
+# docker run -it uadevs /bin/sh
