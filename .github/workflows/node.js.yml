@@ -31,5 +31,5 @@ jobs:
     - name: yarn install, build, and test
       run: |
         yarn
-        yarn build --if-defined
+        yarn build
 #        yarn test
