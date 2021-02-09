@@ -2,13 +2,19 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Installation stage
 
 - Check for ssh keys in ~/.ssh folder(if not present generate by ssh-keygen) and put them to GitHub settings
-- install node.js and yarn
+
+- install node.js with npm
+
+```
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+sudo apt-get install -y nodejs
+```
 - go to the folder with your projects and call the following command:
 
 ```
 git clone git@github.com:ua-devs-com/uadevs.git
 cd uadevs
-yarn install
+npm install && npm run build
 ```
 ## Development stage:
 
