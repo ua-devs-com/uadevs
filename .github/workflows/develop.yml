@@ -2,9 +2,11 @@
 name: deploy to staging server
 on:
   push:
-    branches: [ develop ]
+    branches: 
+      - develop
   pull_request:
-    branches: [ develop ]
+    branches: 
+      - develop
 jobs:
   deploy:
     if: github.ref == 'refs/heads/develop'
