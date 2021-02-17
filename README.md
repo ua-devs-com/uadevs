@@ -1,13 +1,14 @@
-![Deploy to server](https://github.com/ua-devs-com/uadevs/workflows/deploy%20to%20server/badge.svg)
+![Deploy to staging server](https://github.com/ua-devs-com/uadevs/workflows/deploy%20to%20staging%20server/badge.svg)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-## Installation stage
+
+## Installation
 
 - install node.js with yarn
 ```
+sudo su
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-
-sudo apt-get install -y nodejs
+apt-get install -y nodejs
 npm install --global yarn
 
 ```
@@ -15,18 +16,27 @@ npm install --global yarn
 
 ```
 git clone git@github.com:ua-devs-com/uadevs.git
-cd uadevs
-yarn && yarn build
+cd uadevs && yarn
+
 ```
-## Development stage:
+## Development:
 
 - local development server, hot reloading 
+
 ```
 yarn dev
-```
-## Production stage:
 
-- Build and start project in a container
+```
+
+## Deploy to staging server:
+
+```
+On close pull-request in develop branch => auto deploy to staging server via GitHub actions. 
+```
+## Production: Docker or AWS Edge Serverless
+
+- 1.Build and deploy project in a container
+
 ```
 sudo docker build -t uadevs .
 
@@ -34,6 +44,15 @@ sudo docker build -t uadevs .
 
 sudo docker run -p 8080:3000 uadevs
 ```
+
+- 2. Serverless deploy to Amazon (AWS)
+
+[Serverless Next.js at the Edge](https://www.serverless.com/blog/serverless-nextjs)
+
+```
+npx serverless
+```
+
 ## Preview
 
 - for local testing:
