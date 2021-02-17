@@ -15,13 +15,13 @@ jobs:
       - name: pull code from github and rerun project on the server
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USERNAME }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER_NAME }}
           key: ${{ secrets.KEY }}
-          passphrase: ${{ secrets.PASSPHRASE }}
+          passphrase: ${{ secrets.PASS_PHRASE }}
           script: |
-            cd ${{ secrets.PROJECT_PATH }} 
+            cd ${{ secrets.PROJECT_NAME }}
             git pull 
             yarn
             yarn build
-            pm2 restart uadevs
+            pm2 restart ${{ secrets.PROJECT_NAME }}
