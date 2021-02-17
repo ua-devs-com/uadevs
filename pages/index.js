@@ -12,7 +12,7 @@ export default function Home() {
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to <a href="https://ua-devs.com">ua-devs.com!</a>
-          <h4> Test data for deploy!</h4>
+          <h4> Test data for ssh ...</h4>
         </h1>
 
         <p className={styles.description}>
