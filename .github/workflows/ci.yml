@@ -1,4 +1,4 @@
-name: deploy project to stage
+name: deploy to server
 on:
   push:
     branches:
