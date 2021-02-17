@@ -1,27 +1,27 @@
-name: deploy project to staging server
+name: deploy project to stage
 on:
   push:
     branches:
-      - ${{ secrets.DEPLOY_BRANCH }}
+      - develop
   pull_request:
     branches:
-      - ${{ secrets.DEPLOY_BRANCH }}
+      - develop
 jobs:
   deploy:
-    if: github.ref == 'refs/heads/${{ secrets.DEPLOY_BRANCH }}'
+    if: github.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - name: pull code from github and rerun project on the server
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.HOST }}
+          host: ua-devs.com
           username: ${{ secrets.USER_NAME }}
           key: ${{ secrets.KEY }}
           script: |
-            cd ${{ secrets.PROJECT_NAME }}
-            git checkout ${{ secrets.DEPLOY_BRANCH }}
+            cd uadevs
+            git checkout develop
             git pull 
             yarn
             yarn build
-            pm2 restart ${{ secrets.PROJECT_NAME }}
+            pm2 restart uadevs
