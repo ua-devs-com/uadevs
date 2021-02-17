@@ -1,0 +1,23 @@
+name: remote ssh commands
+on:
+  pull_request:
+    types: [closed]
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: pull from github and restart project on server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd ${{ secrets.PROJECT_PATH }} 
+            git pull 
+            yarn
+            yarn build
+            pm2 restart uadevs
