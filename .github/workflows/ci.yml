@@ -2,13 +2,13 @@ name: deploy project to staging server
 on:
   push:
     branches:
-      - develop
+      - ${{ secrets.DEPLOY_BRANCH }}
   pull_request:
     branches:
-      - develop
+      - ${{ secrets.DEPLOY_BRANCH }}
 jobs:
   deploy:
-    if: github.ref == 'refs/heads/develop'
+    if: github.ref == 'refs/heads/${{ secrets.DEPLOY_BRANCH }}'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -18,9 +18,9 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER_NAME }}
           key: ${{ secrets.KEY }}
-          passphrase: ${{ secrets.PASS_PHRASE }}
           script: |
             cd ${{ secrets.PROJECT_NAME }}
+            git checkout ${{ secrets.DEPLOY_BRANCH }}
             git pull 
             yarn
             yarn build
