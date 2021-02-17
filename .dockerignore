@@ -2,4 +2,4 @@
 logs/
 node_modules/
 npm-debug
-docker-compse*.yml
+docker-compose*.yml
