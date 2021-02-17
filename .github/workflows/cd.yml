@@ -1,7 +1,5 @@
 name: remote ssh commands
-on:
-  pull_request:
-    types: [closed]
+on: [push]
 jobs:
   deploy:
     if: github.ref == 'refs/heads/main'
