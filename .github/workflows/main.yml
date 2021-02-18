@@ -1,0 +1,41 @@
+# .github/workflows/main.yml
+name: deploy to aws server
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+jobs:
+  stage_deploy:
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: pull code from github and rerun project on the server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ua-devs.com
+          username: ${{ secrets.USER_NAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            whoami
+            echo "it's stage deploy"
+  aws_edge_deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      - name: yarn install
+        run: yarn
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET }}
+          aws-region: us-east-1
+      - name: Deploy app to AWS
+        run: echo " it's aws deploy "

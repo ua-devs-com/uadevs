@@ -1,32 +1,42 @@
-![Deploy to server](https://github.com/ua-devs-com/uadevs/workflows/deploy%20to%20server/badge.svg)
+![Deploy to staging server](https://github.com/ua-devs-com/uadevs/workflows/deploy%20to%20staging%20server/badge.svg)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-## Installation stage
 
-- Check for ssh keys in ~/.ssh folder(if not present generate by ssh-keygen) and put them to GitHub settings
+## Installation
 
-- install node.js with npm
-
+- install node.js with yarn
 ```
+sudo su
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-sudo apt-get install -y nodejs
+apt-get install -y nodejs
+npm install --global yarn
+
 ```
-- go to the folder with your projects and call the following command:
+- go to the folder with your projects and call the following commands:
 
 ```
 git clone git@github.com:ua-devs-com/uadevs.git
-cd uadevs
-npm install && npm run build
+cd uadevs && yarn
+
 ```
-## Development stage:
+## Development:
 
 - local development server, hot reloading 
+
 ```
 yarn dev
-```
-## Production stage:
 
-- Build and start project in a container
+```
+
+## Deploy to staging server:
+
+```
+On close pull-request in develop branch => auto deploy to staging server via GitHub actions. 
+```
+## Production: Docker or AWS Edge Serverless
+
+- 1.Build and deploy project in a container
+
 ```
 sudo docker build -t uadevs .
 
@@ -34,22 +44,22 @@ sudo docker build -t uadevs .
 
 sudo docker run -p 8080:3000 uadevs
 ```
+
+- 2. Serverless deploy to Amazon (AWS)
+
+[Serverless Next.js at the Edge](https://www.serverless.com/blog/serverless-nextjs)
+
+```
+npx serverless
+```
+
 ## Preview
 
-- for local start: " yarn dev " as example:
-
+- for local testing:
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-
-- for Docker start as production:
+- for Docker as production build:
 Open [http://localhost:8080](http://localhost:8080) with your browser to see the result.
-
 
 ## Learn More
 
