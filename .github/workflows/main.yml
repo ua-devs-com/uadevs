@@ -1,5 +1,5 @@
 # .github/workflows/main.yml
-name: deploy to aws server
+name: deploy to environment
 on:
   push:
     branches: [ main, develop ]
@@ -19,9 +19,13 @@ jobs:
           username: ${{ secrets.USER_NAME }}
           key: ${{ secrets.KEY }}
           script: |
-            whoami
-            echo "it's stage deploy"
-  aws_edge_deploy:
+            cd uadevs
+            git checkout develop
+            git pull 
+            yarn
+            yarn build
+            pm2 restart uadevs
+  aws_deploy:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
@@ -38,4 +42,4 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET }}
           aws-region: us-east-1
       - name: Deploy app to AWS
-        run: echo " it's aws deploy "
+        run: npx serverless
