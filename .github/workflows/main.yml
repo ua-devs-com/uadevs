@@ -35,8 +35,6 @@ jobs:
           node-version: '14.x'
       - name: yarn install
         run: yarn
-      - name: serverless install
-        run: yarn global add serverless
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
