@@ -2,14 +2,27 @@
 name: deploy to aws server
 on:
   push:
-    branches: 
-      - main
+    branches: [ main, develop ]
   pull_request:
-    branches:
-      - main
+    branches: [ main, develop ]
   workflow_dispatch:
 jobs:
-  build:
+  stage_deploy:
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: pull code from github and rerun project on the server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ua-devs.com
+          username: ${{ secrets.USER_NAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            whoami
+            echo "it's stage deploy"
+  aws_edge_deploy:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -25,4 +38,4 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET }}
           aws-region: us-east-1
       - name: Deploy app to AWS
-        run: npx serverless
+        run: echo " it's aws deploy "
