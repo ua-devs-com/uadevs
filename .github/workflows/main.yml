@@ -20,8 +20,9 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
             cd uadevs
-            git checkout develop
-            git pull 
+            git fetch origin develop
+            git reset --hard FETCH_HEAD
+            git clean -df
             yarn
             yarn build
             pm2 restart uadevs
