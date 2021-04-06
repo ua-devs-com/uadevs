@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: pull code from github and rerun project on the server
+      - name: download source code from develop and rebuild project
         uses: appleboy/ssh-action@master
         with:
           host: ua-devs.com
@@ -41,6 +41,6 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET }}
-          aws-region: us-east-1
+          aws-region: us-east-2
       - name: Deploy app to AWS
         run: npx serverless
