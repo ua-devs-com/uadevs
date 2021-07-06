@@ -23,8 +23,8 @@ jobs:
             git fetch origin develop
             git reset --hard FETCH_HEAD
             git clean -df
-            yarn
-            yarn build
+            npm install
+            npm run build
             pm2 restart uadevs
   aws_deploy:
     if: github.ref == 'refs/heads/main'
@@ -34,8 +34,8 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '14.x'
-      - name: yarn install
-        run: yarn
+      - name: npm install
+        run: npm install
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
