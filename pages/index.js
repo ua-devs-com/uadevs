@@ -12,7 +12,6 @@ export default function Home() {
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to <a href="https://ua-devs.com">ua-devs site!</a>
-          <h4> AWS Serverless testing... </h4>
         </h1>
         <p className={styles.description}>
           Get started by editing{' '}
